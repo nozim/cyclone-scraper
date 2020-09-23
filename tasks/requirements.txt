@@ -1,0 +1,6 @@
+celery==4.4.6
+kombu==4.6.11
+psycopg2-binary==2.8.6
+lxml==4.5.2
+requests==2.22.0
+redis==3.5.3        

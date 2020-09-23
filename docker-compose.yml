@@ -1,0 +1,36 @@
+version: '3' 
+
+services:
+  redis: 
+    image: redis:6.0.8
+    ports:
+      - "6379:6379"
+  postgres:
+    image: postgres:latest
+    ports: 
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=cyclone
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  api:
+    build: ./api
+    ports:
+      - "5000:5000"
+    command: "flask run -h 0.0.0.0"
+    depends_on:
+      - postgres
+
+  scraper:
+    build: ./
+    command: ["celery", "-A", "schedule", "worker", "-B", "-l", "debug"]
+    environment: 
+      - C_FORCE_ROOT=true
+    depends_on:
+      - redis
+      - postgres
+
+
+
+
+
