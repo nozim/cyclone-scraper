@@ -1,5 +1,3 @@
-from scraper import scraper
-from repo import db_repo
 from celery import Celery
 from celery.utils.log import get_task_logger
 from kombu import Connection
@@ -12,6 +10,9 @@ h = logging.StreamHandler(sys.stdout)
 log.addHandler(h)
 
 sys.path.append(os.getcwd() + "/..")
+
+from scraper import scraper
+from repo import db_repo
 
 
 CYCLONE_LIST_QUEUE = 'cyclones.list'

@@ -12,5 +12,4 @@ COPY repo ./repo
 
 WORKDIR tasks
 
-CMD ["celery"]
 
